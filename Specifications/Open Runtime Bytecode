@@ -1,0 +1,98 @@
+Open Runtime Bytecode, version 1
+================================
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
+
+The Open Runtime Bytecode (ORB) is a simple bytecode language for use in Open Runtime programs. It is a core part of Open Runtime, and all implementations MUST contain an ORB interpreter.
+
+Format
+------
+
+ORB strings are strings of any bytes except [FD], [FE], and [FF] (used as seperators).
+
+ORB modules begin with a header (If a '#!' is detected, the Runtime MUST move to the end-of-line before parsing the header. This is for UNIX compatibility.). It is formatted as follows:
+
+ORB version[FE]Creator[FE]Author[FE]Module name[FE]Module version[FE]Module size[FE]Module checksum[FE]Entry point[FE]Init function[FF]
+
+* The ORB version is the version of ORB in use in the file. It is a 16-bit unsigned integer. Modules with unknown or unsupported version MUST be rejected by the Runtime.
+* The Creator is the name of the program that created the module. It is a string.
+* Author is the name of the module's author. It is a string.
+* Module name is the name of the module. It is a string.
+* Module version is the version of the module. It is a 16-bit integer.
+* Module size is the size of the module, excluding the header. The Runtime MUST reject the module if the size does not match. It is a 32-bit integer.
+* The Module checksum is an SHA-1 binary checksum of the entire module, not including the header. The Runtime MUST reject the module if the checksum does not match.
+* The Entry point is a function name which is called if the module is executed. It MAY be null, in which case executions MUST be rejected by the Runtime. It is a string.
+* The Init function is a function name which is called every time the module is loaded. It MAY be null. It is a string.
+
+The ORB header is followed by a list of global variables created by the module. Each one is formatted as follows:
+
+Variable name[FE]Type[FE]Constant flag[FE]Initial value (optional)[FF]
+
+* The Variable name is the name of the variable used to reference it from code. It is a string.
+* The Type is used to determine the contents of the variable. See 'Types' later in this document. It is an 8-bit unsigned integer.
+* The Constant flag indicates whether the variable is immutable.
+* The Initial value is the value the variable is initially set to. Its format is dependent on the Type.
+
+The line of global variables is followed by an extra [FF], and the list of functions declared by the module.
+
+Functions are pieces of code, invoked with arguments, which return a value. Their entries in the function list are formatted as follows:
+
+Function name[FE]Code start offset[FE]Code end offset[FF]
+
+* The Function name is a name used to reference and execute the function. It is a string.
+* The Code start offset is an offset from the end of the function list at which function execution begins.
+* The Code end offset is an offset from the end of the function list at which function execution terminates.
+
+After the list of functions is the bytecode itself, one function after the other.
+
+Types
+-----
+
+ORB has a few primitive types, as well as an 'Object' type, which allows new types to be defined. They are enumerated below:
+
+* Byte: an unsigned 8-bit integer. Identified with the type number 0.
+* Integer: a signed 32-bit integer. Identified with the type number 1.
+* Long: a signed 64-bit integer. Identified with the type number 2.
+* Superlong: a signed 128-bit integer. Identified with the type number 3.
+* Float: a signed 32-bit floating-point number. Identified with the type number 4.
+* Long float: a signed 64-bit floating-point number. Identified with the type number 5.
+* Superlong float: a signed 128-bit floating-point number. Identified with the type number 6.
+* String: a string, terminated by a \0. Identified with the type number 7.
+* Object: a user-defined dynamic object. Identified with the type number 8.
+
+ORB virtual machine
+-------------------
+
+The ORB virtual machine is a register-based machine. There are 8 registers each able to hold any value or object reference, not including the FLGS 32-bit flag register. There is a stack of running functions and their local variables, current exception catch points, and arguments, which is invisible to the program. The virtual machine has an exception-handelling mechanism, described in the Exceptions specification. There is an invisible set of flags used by comparison and (in the event of errors) arithmatic operations to pass on their results.
+
+Code formatting and instructions
+--------------------------------
+
+ORB code is formatted into instructions, consisting of a one-byte instruction number, a one-byte flag block, and zero or more instruction-dependent operands. Non-fixed-size operands are terminated by [00] bytes. The valid instructions are enumerated below:
+
+* 00, NOP: No operation.
+* 01, ADD: Add the two operands. The first operand must be a register, and it is where the result is stored. The first two flag bits determine whether the second operand identifies a register, a local variable, a global variable, or a constant value.
+* 02, SUB: Subtract the second operand from the first. The first operand must be a register, and it is where the result is stored. The first two flag bits determine whether the second operand identifies a register, a local variable, a global variable, or a constant value.
+* 03, MUL: Multiply the two operands. The first operand must be a register, and it is where the result is stored. The first two flag bits determine whether the second operand identifies a register, a local variable, a global variable, or a constant value.
+* 04, DIV: Divide the second operand by the first. The first operand must be a register, and it is where the result is stored. The first two flag bits determine whether the second operand identifies a register, a local variable, a global variable, or a constant value. The third flag bit, when enabled, transforms the operation into a modulus.
+* 05, CPY: Copy the first value to the second. The first two flag bits determine whether the second operand identifies a register, a local variable, a global variable, or a constant value.
+* 06, PCPY: Copy a property from an object to a register. The first operand is an object, the second a property name. The first two flag bits determine whether the first operand identifies a register, a local variable, or a global variable.
+* 07, CMP: Compare two numbers of the same types. The first two flag bits determine whether the second operand identifies a register, a local variable, a global variable, or a constant value, while the third and forth flag bits do the same for the second operand.
+* 08, JMP: Transfers execution to another position in the current function. Each flag identifies a possible condition.
+  * 00000001: Less than.
+  * 00000010: Greater than.
+  * 00000100: Equal to.
+  * 00001000: Not equal to.
+  * 00010000: Arithmatic/logic error.
+* 09, ARG: Adds its operand to the stack of arguments for the next function or runtime call. The first two flag bits determine whether the operand identifies a register, variable, or constant value.
+* 0A, CALL: Executes another function by name. Its operand is non-fixed-size, being a string.
+* 0B, MCAL: Almost identical to CALL, except that methods are called, not functions. The second operand is an object reference. The first two flag bits determine whether it identifies a register, variable, or constant value.
+* 0C, RUNT: Executes a runtime request by name. The result is placed in register 0. Its operand is non-fixed-size, being a string.
+* 0D, GARG: Pops the last argument to the current function into register 0.
+* 0E, RET: Return execution to the instruction after the CALL instruction which invoke the current function.
+* 0D, ECAT: Triggers a jump to the specified position (with register 0 set to the exception object) if an exception occurs. If the operant is 0, the catch point is unset.
+* 10, ETHR: Throws its operand as an exception. The first two flag bits determine whether the operand identifies a register, a local variable, or a global variable.
+* 11, OCRT: Creates a new empty object in the specified register or global or local variable.
+* 12, OCPY: Copies an object (normal CPY operations create new references).
+* 13, OPRP: Creates a new property of the specified type. The first operand is a type, the second a name, the third an initial value (which may be null). The first two flag bits determine whether the third operand identifies a register, a local variable, a global variable, or a constant value (e.g. OPRP String hello "Hello, world!").
+* 14, OMTH: Creates a new method, copying the specified function into the specified name (e.g. OMTH Object::blah "blah").
