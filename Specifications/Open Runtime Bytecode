@@ -51,14 +51,16 @@ Types
 ORB has a few primitive types, as well as an 'Object' type, which allows new types to be defined. They are enumerated below:
 
 * Byte: an unsigned 8-bit integer. Identified with the type number 0.
-* Integer: a signed 32-bit integer. Identified with the type number 1.
-* Long: a signed 64-bit integer. Identified with the type number 2.
-* Superlong: a signed 128-bit integer. Identified with the type number 3.
-* Float: a signed 32-bit floating-point number. Identified with the type number 4.
-* Long float: a signed 64-bit floating-point number. Identified with the type number 5.
-* Superlong float: a signed 128-bit floating-point number. Identified with the type number 6.
-* String: a string, terminated by a \0. Identified with the type number 7.
-* Object: a user-defined dynamic object. Identified with the type number 8.
+* Short: a signed 16-bit integer. Identified with the type number 1.
+* Integer: a signed 32-bit integer. Identified with the type number 2.
+* Long: a signed 64-bit integer. Identified with the type number 3.
+* Superlong: a signed 128-bit integer. Identified with the type number 4.
+* Short float: a signed 16-bit floating-point number. Identified with the type number 5.
+* Float: a signed 32-bit floating-point number. Identified with the type number 6.
+* Long float: a signed 64-bit floating-point number. Identified with the type number 7.
+* Superlong float: a signed 128-bit floating-point number. Identified with the type number 8.
+* String: a string, terminated by a \0. Identified with the type number 9.
+* Object: a user-defined dynamic object. Identified with the type number A.
 
 ORB virtual machine
 -------------------
@@ -90,7 +92,7 @@ ORB code is formatted into instructions, consisting of a one-byte instruction nu
 * 0C, RUNT: Executes a runtime request by name. The result is placed in register 0. Its operand is non-fixed-size, being a string.
 * 0D, GARG: Pops the last argument to the current function into register 0.
 * 0E, RET: Return execution to the instruction after the CALL instruction which invoke the current function.
-* 0D, ECAT: Triggers a jump to the specified position (with register 0 set to the exception object) if an exception occurs. If the operant is 0, the catch point is unset.
+* 0D, ECAT: Triggers a jump to the specified position (with register 0 set to the exception object) if an exception occurs. If the operand is 0, the catch point is unset.
 * 10, ETHR: Throws its operand as an exception. The first two flag bits determine whether the operand identifies a register, a local variable, or a global variable.
 * 11, OCRT: Creates a new empty object in the specified register or global or local variable.
 * 12, OCPY: Copies an object (normal CPY operations create new references).
