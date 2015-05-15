@@ -14,7 +14,7 @@ ORB modules begin with a header (If a '#!' is detected, the Runtime MUST move to
 
 ORB version[FE]Creator[FE]Author[FE]Module name[FE]Module version[FE]Module size[FE]Module checksum[FE]Entry point[FE]Init function[FF]
 
-* The ORB version is the version of ORB in use in the file. It is a 16-bit unsigned integer. Modules with unknown or unsupported version MUST be rejected by the Runtime.
+* The ORB version is the version of ORB in use in the module. It is a 16-bit unsigned integer. Modules with unknown or unsupported version MUST be rejected by the Runtime.
 * The Creator is the name of the program that created the module. It is a string.
 * Author is the name of the module's author. It is a string.
 * Module name is the name of the module. It is a string.

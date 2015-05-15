@@ -1,0 +1,4 @@
+Exceptions
+==========
+
+The exception system in Open Runtime is fairly simplistic. When an exception is thrown (either by the Runtime itself or by an ETHR<0x10> instruction), the Runtime checks if an exception catch point is set in the current function (by an ECAT<0x0D>) instruction). If so, the Runtime sets register 0 to the exception object and jumps execution to the catch point. If not, the function stack is unwound until a catch point is found, at which point execution is jumped there, with register 0 set to the exception. If the stack unwinds fully before a catch point is found, the program is terminated with an "Uncaught exception" error.
