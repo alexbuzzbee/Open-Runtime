@@ -96,8 +96,7 @@ ORB code is formatted into instructions, consisting of a one-byte instruction nu
 * 0D, ECAT: Triggers a jump to the specified position (with register 0 set to the exception object) if an exception occurs. If the operand is 0, the catch point is unset.
 * 10, ETHR: Throws its operand as an exception. The first two flag bits determine whether the operand identifies a register, or a global variable.
 * 11, OCRT: Creates a new empty object in the specified register or global variable.
-* 12, OCPY: Copies an object (normal CPY operations copy by value).
-* 13, OPRP: Creates a new property of the specified type. The first operand is a type, the second a name, the third an initial value (which may be null), the forth an object. The first two flag bits determine whether the third operand identifies a register, a global variable, or a constant value; the second two flag bits do much the same for the forth operand (e.g. OPRP String hello "Hello, world!" myObj).
-* 14, OMTH: Creates a new method, creating a reference to the specified function in the specified name, within the specified object (e.g. OMTH Object::blah "blah" myObj).
-* 15, GREF: Creates a new reference to the value referenced by the first operand and places it in the second operand. The first two flag bits determine whether the first operand identifies a register or a global variable.
-* 16, TYPE: Places the type number of the first operand into the second, which must be a register. The first two flag bits determine whether the first operand identifies a register or a global variable.
+* 12, OPRP: Creates a new property of the specified type. The first operand is a type, the second a name, the third an initial value (which may be null), the forth an object. The first two flag bits determine whether the third operand identifies a register, a global variable, or a constant value; the second two flag bits do much the same for the forth operand (e.g. OPRP String hello "Hello, world!" myObj).
+* 13, OMTH: Creates a new method, creating a reference to the specified function in the specified name, within the specified object (e.g. OMTH Object::blah "blah" myObj).
+* 14, GREF: Creates a new reference to the value referenced by the first operand and places it in the second operand. The first two flag bits determine whether the first operand identifies a register or a global variable.
+* 15, TYPE: Places the type number of the first operand into the second, which must be a register. The first two flag bits determine whether the first operand identifies a register or a global variable.
