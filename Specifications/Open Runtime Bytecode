@@ -65,7 +65,7 @@ ORB has a few primitive types, as well as an 'Object' type, which allows new typ
 ORB virtual machine
 -------------------
 
-The ORB virtual machine is a register-based machine. There are 16 registers numbered 0 to 7 each able to hold a reference to any value. There is a stack of running functions, current exception catch points, and arguments, which is invisible to the program. The virtual machine has an exception-handling mechanism, described in the Exceptions specification. There is an invisible set of flags used by comparison and (in the event of errors) arithmatic operations to pass on their results.
+The ORB virtual machine is a register-based machine. There are 16 registers numbered 0 to 7 each able to hold a reference to any value. There is a stack of running functions, current exception catch points, and arguments, which is invisible to the program. The virtual machine has an exception-handling mechanism, described in the Exceptions specification. There is an invisible set of flags used by comparison and (in the event of errors) arithmetic operations to pass on their results.
 
 Code formatting and instructions
 --------------------------------
@@ -85,7 +85,7 @@ ORB code is formatted into instructions, consisting of a one-byte instruction nu
   * 00000010: Greater than.
   * 00000100: Equal to.
   * 00001000: Not equal to.
-  * 00010000: Arithmatic/logic error.
+  * 00010000: Arithmetic/logic error.
   * 10000000: Always.
 * 09, ARG: Adds its operand to the stack of arguments for the next function or runtime call. The first two flag bits determine whether the operand identifies a register, variable, or constant value.
 * 0A, CALL: Executes another function by name. Its operand is non-fixed-size, being a string.
@@ -100,3 +100,4 @@ ORB code is formatted into instructions, consisting of a one-byte instruction nu
 * 13, OPRP: Creates a new property of the specified type. The first operand is a type, the second a name, the third an initial value (which may be null), the forth an object. The first two flag bits determine whether the third operand identifies a register, a global variable, or a constant value; the second two flag bits do much the same for the forth operand (e.g. OPRP String hello "Hello, world!" myObj).
 * 14, OMTH: Creates a new method, creating a reference to the specified function in the specified name, within the specified object (e.g. OMTH Object::blah "blah" myObj).
 * 15, GREF: Creates a new reference to the value referenced by the first operand and places it in the second operand. The first two flag bits determine whether the first operand identifies a register or a global variable.
+* 16, TYPE: Places the type number of the first operand into the second, which must be a register. The first two flag bits determine whether the first operand identifies a register or a global variable.
