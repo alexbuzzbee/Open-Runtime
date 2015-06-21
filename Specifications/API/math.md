@@ -7,23 +7,23 @@ The math API provides generic mathematical functions to allow more complex math 
 List of API functions
 ---------------------
 
- * factorial(num: Long): Returns the factorial of `num`.
- * exponent(num: Long float, base: Long): Returns `num`^`base`.
- * root(num: Long float, base: Long): Returns the `base`th root of `num`.
- * log(base: Long, num: Long float): Returns the logarithm `num` to base `base`.
+ * `factorial(num: Long)`: Returns the factorial of `num`.
+ * `exponent(num: Long float, base: Long)`: Returns `num`^`base`.
+ * `root(num: Long float, base: Long)`: Returns the `base`th root of `num`.
+ * `log(base: Long, num: Long float)`: Returns the logarithm `num` to base `base`.
 
 ### Constants
 
- * pi(): Returns an approximation of π.
- * e(): Returns an approximation of e.
+ * `pi()`: Returns an approximation of π.
+ * `e()`: Returns an approximation of e.
 
 ### Trigonometric functions
 
- * sin(num: Long float): Returns the sine of `num`.
- * cos(num: Long float): Returns the cosine of `num`.
- * arcsin(num: Long float): Returns the arcsine of `num`.
- * sec(num: Long float): Returns the secant of `num`.
- * csc(num: Long float): Returns the cosecant of `num`.
- * tan(num: Long float): Returns the tangent of `num`.
- * arctan(num: Long float): Returns the arctangent of `num`.
- * cotan(num: Long float): Returns the cotangent of `num`.
+ * `sin(num: Long float)`: Returns the sine of `num`.
+ * `cos(num: Long float)`: Returns the cosine of `num`.
+ * `arcsin(num: Long float)`: Returns the arcsine of `num`.
+ * `sec(num: Long float)`: Returns the secant of `num`.
+ * `csc(num: Long float)`: Returns the cosecant of `num`.
+ * `tan(num: Long float)`: Returns the tangent of `num`.
+ * `arctan(num: Long float)`: Returns the arctangent of `num`.
+ * `cotan(num: Long float)`: Returns the cotangent of `num`.
