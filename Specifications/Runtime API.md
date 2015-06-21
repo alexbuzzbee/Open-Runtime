@@ -43,6 +43,9 @@ The list of Open Runtime APIs are as follows:
 
  * terminal: Required. Provides terminal I/O.
  * terminal.curses (passthrough): Recommended on Unix, Optional on others. Provides access to the ncurses terminal utility library.
+ * math: Required. Provides various math functions.
+ * string: Required. Provides various functions for working with Strings.
+ * cast: Required. Provides typecasting between various types.
  * filesystem: Required. Provides access to the filesystem.
  * process: Required. Provides process management and starting.
  * thread: Recommended. Provides cross-platform threading.
