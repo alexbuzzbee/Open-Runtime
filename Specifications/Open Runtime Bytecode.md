@@ -65,7 +65,7 @@ ORB has a few primitive types, as well as an 'Object' type, which allows new typ
 ORB virtual machine
 -------------------
 
-The ORB virtual machine is a register-based machine. There are 16 registers numbered 0 to 7 each able to hold a reference to any value. There is a stack of running functions, current exception catch points, and arguments, which is invisible to the program. The virtual machine has an exception-handling mechanism, described in the Exceptions specification. There is an invisible set of flags used by comparison and (in the event of errors) arithmetic operations to pass on their results.
+The ORB virtual machine is a register-based machine. There are 16 registers numbered 0 to 15 each able to hold a reference to any value. The virtual machine has an exception-handling mechanism, described in the Exceptions specification. There is an invisible set of binary flags used by comparison and (in the event of errors) arithmetic operations to pass on their results.
 
 Code formatting and instructions
 --------------------------------
