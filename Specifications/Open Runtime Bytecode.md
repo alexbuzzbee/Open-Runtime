@@ -60,7 +60,9 @@ ORB has a few primitive types, as well as an 'Object' type, which allows new typ
 * Float: a signed 32-bit floating-point number. Identified with the type number 0x7.
 * Long float: a signed 64-bit floating-point number. Identified with the type number 0x8.
 * String: any series of bytes except [00], terminated by a [00]. Identified with the type number 0x9.
-* Object: a user-defined dynamic object. Identified with the type number 0xA. (NOTE: Objects cannot be constant!)
+* Boolean: true or false. Identified with the type number 0xA.
+* RuntimeData: a runtime-created value which cannot be manipulated by user code without calling the runtime. Identified with the type number 0xB
+* Object: a user-defined dynamic object. Identified with the type number 0xC. (NOTE: Objects cannot be constant!)
 
 ORB virtual machine
 -------------------
