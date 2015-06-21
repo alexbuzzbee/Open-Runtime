@@ -20,26 +20,37 @@ The Open Runtime API is made up of several smaller APIs. They are divided into a
  * Optional: These APIs MAY be implemented. Implementations which provide all Required and Recommended APIs and any number of Optional APIs are 'Extended'.
  * Deprecated: These APIs SHOULD NOT be implemented. Implementations which provide any number of Deprecated APIs are 'Zealously-compatible'.
 
+Passthrough APIs
+----------------
+
+Passthrough APIs allow easy use of existing APIs without the necessity of redefining them completely. If a specification document for such an API exists, anything stated in it overrides anything stated here.
+
+All functions MUST be renamed to remove any namespacing prefix (such prefixes are already handled), and then to maintain their existing naming scheme. For example, `glBegin`, in graphics.opengl, becomes `graphics.opengl.begin`, and `glCreateBuffer` becomes `graphics.opengl.createBuffer`.
+
+Any API-defined non-number types MUST be represented either as RuntimeDatas, or as Objects depending on whether their primary purpose is to have operations performed on them. For example, an open window would be an Object with methods, but a time would be a RuntimeData. If such a type needs to be created by user code but no function is defined by the API itself, a new function MUST be added named `create<PascalCasedTypeName>()`, which returns a default-value instance.
+
+Global variables are represented by adding two new functions to the API: `get_<variableName>()` (the 'getter') and `set_<variableName>(newValue)` (the 'setter'). The first MUST return the current value, while the second MUST set it to its first argument and returns the previous value. An 'ArgumentException' exception MUST be thrown by the setter if no new value is provided.
+
 APIs
 ----
 
 The list of Open Runtime APIs are as follows:
 
  * terminal: Required. Provides terminal I/O.
- * terminal.curses: Recommended on Unix, Optional on others. Provides access to an implementation of the ncurses terminal utility library.
+ * terminal.curses (passthrough): Recommended on Unix, Optional on others. Provides access to the ncurses terminal utility library.
  * filesystem: Required. Provides access to the filesystem.
  * process: Required. Provides process management and starting.
  * thread: Recommended. Provides cross-platform threading.
- * graphics.opengl: Recommended. Provides access to OpenGL.
+ * graphics.opengl (passthrough): Recommended. Provides access to OpenGL.
  * windowing.generic: Recommended on graphical operating systems, Optional on others. Provides generic windowing functionality.
- * windowing.win32: Recommended on Windows, Deprecated on others. Provides Windows windowing.
- * windowing.glfw: Recommended. Provides access to the GLFW API.
- * widgets.win32: Recommended on Windows, Deprecated on others. Provides Windows graphics widgets.
- * framework.qt: Optional. Provides access to the Qt framework.
- * framework.tk: Optional. Provides access to the Tk toolkit.
- * framework.gtkplus: Optional. Provides access to the GTK+ framework.
- * framework.wxwidgets: Optional. Provides access to the wxWidgets toolkit.
- * framework.cocoa: Recommended on OS X, Optional on others. Provides access to Cocoa.
- * system.unix: Recommended on Unix and OS X, Optional on others. Provides access to the POSIX/SUS standard Unix API.
- * system.osx: Recommended on OS X, Optional on others. Provides access to OS X Core Services.
- * system.windows: Recommended on Windows, Deprecated on others. Provides direct access to the Win32 API.
+ * windowing.windows (passthrough): Recommended on Windows, Deprecated on others. Provides Windows windowing.
+ * windowing.glfw (passthrough): Recommended. Provides access to the GLFW API.
+ * widgets.windows (passthough): Recommended on Windows, Deprecated on others. Provides Windows graphics widgets.
+ * framework.qt (passthough): Optional. Provides access to the Qt framework.
+ * framework.tk (passthough): Optional. Provides access to the Tk toolkit.
+ * framework.gtkplus (passthough): Optional. Provides access to the GTK+ framework.
+ * framework.wxwidgets (passthough): Optional. Provides access to the wxWidgets toolkit.
+ * framework.cocoa (passthough): Recommended on OS X, Optional on others. Provides access to Cocoa.
+ * system.unix (passthough): Recommended on Unix and OS X, Optional on others. Provides access to the POSIX/SUS standard Unix API.
+ * system.osx (passthrough): Recommended on OS X, Optional on others. Provides access to OS X Core Services.
+ * system.windows (passthrough): Recommended on Windows, Deprecated on others. Provides direct access to the Win32 API.
