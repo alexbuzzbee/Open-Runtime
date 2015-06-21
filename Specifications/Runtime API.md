@@ -17,7 +17,7 @@ The Open Runtime API is made up of several smaller APIs. They are divided into a
 
  * Required: These APIs are parts of the core of Open Runtime, and MUST be provided by all implementations. Implementations which provide less then all Required APIs are 'Nonconforming'. Implementations which provide only Required APIs are 'Minimal'.
  * Recommended: These APIs SHOULD be implemented, but are not required. Some APIs may be Recommended on one platform, but Optional or Deprecated on others. Implementations which provide all Required APIs and some but not all Recommended APIs are 'Partial'. Implementations which provide all Required and Recommended APIs are 'Full'.
- * Optional: These APIs MAY be implemented. Implementations which provide all Required and Recommended APIs and any number of Optional APIs are 'Extended'.
+ * Optional: These APIs MAY be implemented. Implementations which provide all Required and Recommended APIs and any number of Optional or unspecified APIs are 'Extended'.
  * Deprecated: These APIs SHOULD NOT be implemented. Implementations which provide any number of Deprecated APIs are 'Zealously-compatible'.
 
 Namespacing
