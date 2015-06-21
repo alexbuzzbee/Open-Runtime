@@ -67,6 +67,14 @@ ORB virtual machine
 
 The ORB virtual machine is a register-based machine. There are 16 registers numbered 0 to 15 each able to hold a reference to any value. The virtual machine has an exception-handling mechanism, described in the Exceptions specification. There is an invisible set of binary flags used by comparison and (in the event of errors) arithmetic operations to pass on their results.
 
+The flags are as follows:
+
+* Less
+* Greater
+* Equal
+* Not equal
+* Error (used to identify an error when an exception is unnecessary)
+
 Code formatting and instructions
 --------------------------------
 
