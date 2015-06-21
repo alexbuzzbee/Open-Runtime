@@ -20,6 +20,11 @@ The Open Runtime API is made up of several smaller APIs. They are divided into a
  * Optional: These APIs MAY be implemented. Implementations which provide all Required and Recommended APIs and any number of Optional APIs are 'Extended'.
  * Deprecated: These APIs SHOULD NOT be implemented. Implementations which provide any number of Deprecated APIs are 'Zealously-compatible'.
 
+Namespacing
+-----------
+
+APIs are to be namespaced for access in a RUNT[0C] instruction by prepending the API name, followed by a dot, to the function name. For example, `print(value)` in the terminal API becomes `terminal.print(value)` in the global Runtime API namespace.
+
 Passthrough APIs
 ----------------
 
