@@ -19,7 +19,7 @@ List of API functions
 
  * print(value: String): Prints a String value to the main terminal. Returns a Short indicating error condition, which may be 0 (success), 1 (no terminal), 2 (invalid value), 3 (value too long), or 32767 (unknown error).
  * read(length: Integer): Reads `length` bytes from the main terminal and returns them as a string.
- * clear(): Clears the screen. Returns Returns a Short indicating error condition, which may be 0 (success), 1 (no terminal), or 32767 (unknown error).
+ * clear(): Clears the screen. Returns a Short indicating error condition, which may be 0 (success), 1 (no terminal), or 32767 (unknown error).
  * readUntil(endByte: Byte): Reads bytes from the main terminal until a byte with the value of `endByte` is read, at which point reading stops and a String containing the read data (minus the `endByte`) is returned.
- * getSystemNewline(): Returns the newline character used on the current system. Similar to C++'s `std::endl`
+ * getSystemNewline(): Returns the newline character used on the current system. Similar to C++'s `std::endl`.
  * readLine(): Equivalent to readUntil(getSystemNewline()).
