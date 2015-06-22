@@ -34,7 +34,7 @@ All functions MUST be renamed to remove any namespacing prefix (such prefixes ar
 
 Any API-defined non-number types MUST be represented either as RuntimeDatas, or as Objects depending on whether their primary purpose is to have operations performed on them or if they have user code-editable properties. For example, an open window would be an Object with methods, but a timestamp would be a RuntimeData. If such a type needs to be created by user code but no function is defined by the API itself, a new function MUST be added named `create<PascalCasedTypeName>()`, which returns a default-value instance (e.g, `createWindow()` would return a new default Window object).
 
-Global variables are represented by adding two new functions to the API: `get_<variableName>()` (the 'getter') and `set_<variableName>(newValue)` (the 'setter'). The first MUST return the current value, while the second MUST set it to its first argument and returns the previous value. An 'ArgumentException' exception MUST be thrown by the setter if no new value is provided.
+Global variables are represented by adding two new functions to the API: `get_<variableName>()` (the 'getter') and `set_<variableName>(newValue)` (the 'setter'). The first MUST return the current value, while the second MUST set it to its first argument and returns the previous value. A `"BadArgumentException"` exception MUST be thrown by the setter if no new value is provided.
 
 APIs
 ----
