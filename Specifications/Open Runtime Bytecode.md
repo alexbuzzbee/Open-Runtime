@@ -80,7 +80,7 @@ The flags are as follows:
 Code formatting and instructions
 --------------------------------
 
-ORB code is formatted into instructions, consisting of a one-byte instruction number, a one-byte flag block, and zero or more instruction-dependent operands. Non-fixed-size operands are terminated by [00] bytes. Constant operands are prefixed with a two-byte type number. The Runtime MUST move through the code of the current function, executing each instruction as it comes across it, until it comes across a JMP or CALL instruction. Invalid instructions MUST trigger the String "InvalidInstructionException:{hexadecimal instruction code}" to be thrown as an exception. The valid instructions are enumerated below in the format {hexadeximal instruction code}, MEMONIC: Description.
+ORB code is formatted into instructions, consisting of a one-byte instruction number, a one-byte flag block, and zero or more instruction-dependent operands. Non-fixed-size operands are terminated by [00] bytes. Constant operands are prefixed with a two-byte type number. The Runtime MUST move through the code of the current function, executing each instruction as it comes across it, until it comes across a JMP or CALL instruction. Invalid instructions MUST trigger the String `"InvalidInstructionException:{hexadecimal instruction code}"` to be thrown as an exception. The valid instructions are enumerated below in the format {hexadeximal instruction code}, MEMONIC: Description.
 
 * 00, NOP: No operation.
 * 01, ADD: Add the two operands. The first operand must be a register, and it is where the result is stored. The first two flag bits determine whether the second operand identifies a register, a global variable, or a constant value.
