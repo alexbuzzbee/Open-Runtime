@@ -8,7 +8,7 @@ List of API functions
 ---------------------
 
  * `factorial(num: Long)`: Returns the factorial of `num`.
- * `exponent(num: Long float, base: Long)`: Returns `num`^`base`.
+ * `exponent(num: Long float, exp: Long)`: Returns `num`^`exp`.
  * `root(num: Long float, base: Long)`: Returns the `base`th root of `num`.
  * `log(base: Long, num: Long float)`: Returns the logarithm `num` to base `base`.
 
