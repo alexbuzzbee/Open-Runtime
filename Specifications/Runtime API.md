@@ -41,6 +41,7 @@ APIs
 
 The list of Open Runtime APIs are as follows:
 
+ * core: Required. Essential functionality.
  * terminal: Required. Provides terminal I/O.
  * terminal.curses (passthrough): Recommended on Unix, Optional on others. Provides access to the ncurses terminal utility library.
  * math: Required. Provides various math functions.
