@@ -9,6 +9,7 @@ List of API functions
 
 * `concat(str1: String, str2: String)`: Concatenates `str2` to the end of `str1` and returns the result.
 * `length(str: String)`: Returns the length of `str`.
+* `encoding(str: String)`: Returns an MIME charset name (such as "UTF-8", "US-ASCII", "EBCDIC-US", "macintosh", or "windows-1252") identifying the character set of `str`.
 * `toBytes(str: String)`: Converts `str` to an Object with 0-indexed numeric property names and returns it. Each property is one of the bytes that makes up the String.
 * `fromBytes(bytes: Object)`: The inverse of `toBytes(str)`.
 * `toLong(str: String)`: Converts `str` to a Long.
