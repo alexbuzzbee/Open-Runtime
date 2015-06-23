@@ -11,6 +11,7 @@ List of API functions
  * `exponent(num: Long float, exp: Long)`: Returns `num`^`exp`.
  * `root(num: Long float, base: Long)`: Returns the `base`th root of `num`.
  * `log(base: Long, num: Long float)`: Returns the logarithm `num` to base `base`.
+ * `abs(num: Long float)`: Returns the absolute value of `num`.
 
 ### Constants
 
