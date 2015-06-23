@@ -10,6 +10,8 @@ Return value: register 0
 
 Preserved: all others
 
+If one of the arguments to a runtime call is the wrong type, it SHOULD throw a `"BadArgumentException"`.
+
 Requirement levels
 ------------------
 
