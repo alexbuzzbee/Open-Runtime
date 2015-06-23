@@ -51,7 +51,6 @@ The list of Open Runtime APIs are as follows:
  * cast: Required. Provides typecasting between various types.
  * filesystem: Required. Provides access to the filesystem.
  * process: Required. Provides process management and starting.
- * thread: Recommended. Provides cross-platform threading.
  * graphics.opengl (passthrough): Recommended. Provides access to OpenGL.
  * windowing.generic: Recommended on graphical operating systems, Optional on others. Provides generic windowing functionality.
  * windowing.windows (passthrough): Recommended on Windows, Deprecated on others. Provides Windows windowing.
