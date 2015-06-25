@@ -29,13 +29,13 @@ The ORB header is followed by a list of global variables created by the module. 
 Variable name[FE]Type[FE]Constant flag[FE]Initial value (optional)[FF]
 
 * The Variable name is the name of the variable used to reference it from code. It is a string.
-* The Type is used to determine the contents of the variable. See 'Types' later in this document. It is an 8-bit unsigned integer.
+* The Type is used to determine the contents of the variable. See 'Types' later in this document. It is an 16-bit unsigned integer.
 * The Constant flag indicates whether the variable is immutable (read-only).
-* The Initial value is the value the variable is initially set to. Its format is dependent on the Type.
+* The Initial value is the value the variable is initially set to. Its format is dependent on the Type, and is null for Objects and RuntimeDatas.
 
 The line of global variables is followed by an extra [FF], and the list of functions declared by the module.
 
-Functions are pieces of code, invoked with arguments, which return a value. Their entries in the function list are formatted as follows:
+Functions are pieces of code, invoked with arguments. Their entries in the function list are formatted as follows:
 
 Function name[FE]Code start offset[FE]Code end offset[FF]
 
@@ -90,7 +90,7 @@ ORB code is formatted into instructions, consisting of a one-byte instruction nu
 * 05, CPY: Copy the first value to the second. The first two flag bits determine whether the first operand identifies a register, a global variable, or a constant value. The second two flag bits determine whether the second operand identifies a register, or a global variable.
 * 06, PCPY: Copy a property from an object to a register. The first operand is an object, the second a property name. The first two flag bits determine whether the first operand identifies a register, or a global variable.
 * 07, CMP: Compare two numbers of the same type. The first two flag bits determine whether the second operand identifies a register, a global variable, or a constant value, while the third and forth flag bits do the same for the second operand.
-* 08, JMP: Transfers execution to another position in the current function. Each flag identifies a possible condition.
+* 08, JMP: Transfers execution to another position in the current function, identified with a 64-bit offset. Each flag identifies a possible condition.
   * 00000001: Less than.
   * 00000010: Greater than.
   * 00000100: Equal to.
