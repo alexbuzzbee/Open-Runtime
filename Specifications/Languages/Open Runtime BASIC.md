@@ -135,3 +135,51 @@ FUNCTION main()
   ;9
   ;10".
 ```
+
+Header information and module loading is done through directives (similar to ORASM directives), using the `#` character; the following is a list of directives:
+
+ * All header-data directives from ORASM. NOTE: `#init` sets a function to be called by the ORBASIC implicit init function, which performs setup of ORBASIC modules (such as module loading).
+ * `#var`: Declares a variable without defining it. Takes three parameters: The variable's name, its type, and its initial value (e.g, `/var someVariable Long 37`).
+ * `#func`: Declares, without defining, a function. Takes three parameters: The function's name, its start offset, and its end offset.
+ * `#asm`: Passes some assembly directly into the module.
+ * `#module`: Add a `loadModule(name)` call for the specified module to the implicit init function.
+
+Some examples:
+
+```
+#name SomeModule
+#author A Dude
+#version 1.0
+#entry someEntry
+
+aGlobal = 3
+
+FUNCTION main()
+  #asm MOV aGlobal, r1
+END FUNCTION
+```
+
+Implementation
+--------------
+
+ORBASIC modules have an implicit init function, generated automatically by the compiler. The `#init` directive simply adds a `CALL` instruction to the end of this function. This init function performs ORBASIC-specific setup such as `loadModule(name)` calls.
+
+ORBASIC functions return values in `r0` and preserve all other registers. The internal code to do so is implementation-dependant. Methods and initializers take as their first argument the `self` value, identifying the object to operate on.
+
+ORBASIC implements object-orientation through at least one function per class. Each class has a function named `__class_<className>_create()`, optionally (if an `INITIALIZER` is specified), an `__class_<className>_init()` function, and one function per method, named `__class_<className>_<methodName>()`. `__class_<className>_create()` is responsible for creating an Object using OCRT, setting the appropriate properties, adding methods, and finally calling `__class_<className>_init()`. A mocked up `__class_<className>_create()` function in ORASM follows:
+
+```
+___class_SomeClass_create:
+  OCRT r0
+  CPRP Long float, property, 2, r0
+  OMTH __class_SomeClass_get, get, r0
+  OMTH __class_SomeClass_set, set, r0
+  OMTH __class_SomeClass_print, print, r0'
+  GREF r0, r1
+  ARG r1
+  GARG
+  ARG r0
+  CALL __class_SomeClass_init
+  GREF r1, r0
+  RET
+```
