@@ -1,11 +1,10 @@
-Open Runtime BASIC Specification, version 1
-===========================================
+# Open Runtime BASIC Specification, version 1
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 Open Runtime BASIC (ORBASIC) is an object-oriented variant of BASIC (the Beginner's All-purpose Symbolic Instruction Code) designed for use in Open Runtime.
 
-Basic syntax
-------------
+## Basic syntax
 
 The basic syntax of ORBASIC is fairly complex. The best way to teach is by example, and so, the syntax is given in example format.
 
@@ -159,8 +158,7 @@ FUNCTION main()
 END FUNCTION
 ```
 
-Implementation
---------------
+## Implementation
 
 ORBASIC modules have an implicit init function, generated automatically by the compiler. The `#init` directive simply adds a `CALL` instruction to the end of this function. This init function performs ORBASIC-specific setup such as `loadModule(name)` calls.
 

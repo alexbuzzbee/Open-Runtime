@@ -1,12 +1,10 @@
-Open Runtime Bytecode, version 1
-================================
+# Open Runtime Bytecode, version 1
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 The Open Runtime Bytecode (ORB) is a simple bytecode language for use in Open Runtime programs. It is a core part of Open Runtime, and all implementations MUST contain an ORB interpreter.
 
-Format
-------
+## Format
 
 ORB strings are strings of any bytes except [FD], [FE], and [FF] (used as seperators).
 
@@ -45,8 +43,7 @@ Function name[FE]Code start offset[FE]Code end offset[FF]
 
 After the list of functions is the bytecode itself, one function after the other.
 
-Types
------
+## Types
 
 ORB has a few primitive types, as well as an 'Object' type, which allows new types to be defined. They are enumerated below:
 
@@ -64,8 +61,7 @@ ORB has a few primitive types, as well as an 'Object' type, which allows new typ
 * RuntimeData: a runtime-created value which cannot be manipulated by user code without calling the runtime. Identified with the type number 0xB
 * Object: a user-defined dynamic object containing properties and methods. Methods are identified with Strings, properties with Strings or Longs. Identified with the type number 0xC. (NOTE: Objects cannot be constant!)
 
-ORB virtual machine
--------------------
+## ORB virtual machine
 
 The ORB virtual machine is a register-based machine. There are 16 registers numbered 0 to 15 each able to hold a reference to any value. The virtual machine has an exception-handling mechanism, described in the Exceptions specification. There is an invisible set of binary flags used by comparison and (in the event of errors) arithmetic operations to pass on their results.
 
@@ -77,8 +73,7 @@ The flags are as follows:
 * Not equal
 * Error (used to identify an error when an exception is unnecessary)
 
-Code formatting and instructions
---------------------------------
+## Code formatting and instructions
 
 ORB code is formatted into instructions, consisting of a one-byte instruction number, a one-byte flag block, and zero or more instruction-dependent operands. Non-fixed-size operands are terminated by [00] bytes. Constant operands are prefixed with a two-byte type number. The Runtime MUST move through the code of the current function, executing each instruction as it comes across it, until it comes across a JMP or CALL instruction. Invalid instructions MUST trigger the String `"InvalidInstructionException:{hexadecimal instruction code}"` to be thrown as an exception. The valid instructions are enumerated below in the format {hexadeximal instruction code}, MEMONIC: Description.
 

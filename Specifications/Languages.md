@@ -1,5 +1,4 @@
-Open Runtime Language List, version 1
-=====================================
+# Open Runtime Language List, version 1
 
 Open Runtime officially supports a few languages, enumerated in this file.
 

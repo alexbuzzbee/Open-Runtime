@@ -1,5 +1,5 @@
-Open Runtime API Specification, version 1
-=========================================
+# Open Runtime API Specification, version 1
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 Open Runtime has a simplistic API, accessed using the `RUNT[0C]` instruction. The Runtime's calling convention is as follows:
@@ -12,8 +12,7 @@ Preserved: all others
 
 If one of the arguments to a runtime call is the wrong type, it SHOULD throw a `"BadArgumentException"`.
 
-Requirement levels
-------------------
+## Requirement levels
 
 The Open Runtime API is made up of several smaller APIs. They are divided into a few categories:
 
@@ -22,13 +21,11 @@ The Open Runtime API is made up of several smaller APIs. They are divided into a
  * Optional: These APIs MAY be implemented. Implementations which provide all Required and Recommended APIs and any number of Optional or unspecified APIs are 'Extended'.
  * Deprecated: These APIs SHOULD NOT be implemented. Implementations which provide any number of Deprecated APIs are 'Zealously-compatible'.
 
-Namespacing
------------
+## Namespacing
 
 APIs are to be namespaced for access in a RUNT[0C] instruction by prepending the API name, followed by a dot, to the function name. For example, `print(value)` in the terminal API becomes `terminal.print(value)` in the global Runtime API namespace.
 
-Passthrough APIs
-----------------
+## Passthrough APIs
 
 Passthrough APIs allow easy use of existing APIs without the necessity of redefining them completely. If a specification document for such an API exists, anything stated in it overrides anything stated here.
 
@@ -38,8 +35,7 @@ Any API-defined non-number types MUST be represented either as RuntimeDatas, or 
 
 Global variables are represented by adding two new functions to the API: `get_<variableName>()` (the 'getter') and `set_<variableName>(newValue)` (the 'setter'). The first MUST return the current value, while the second MUST set it to its first argument and returns the previous value. A `"BadArgumentException"` exception MUST be thrown by the setter if no new value is provided.
 
-APIs
-----
+## APIs
 
 The list of Open Runtime APIs are as follows:
 

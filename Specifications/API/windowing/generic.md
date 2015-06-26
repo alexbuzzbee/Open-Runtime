@@ -1,11 +1,10 @@
-Open Runtime windowing.generic API, version 1
-=============================================
+# Open Runtime windowing.generic API, version
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 The windowing.generic API provides generic cross-platform window management and event handling for said windows. Along with cross-platform graphics such as OpenGL, this allows fully portable and custom UIs.
 
-List of API functions
----------------------
+## List of API function
 
  * `listWindows()`: Returns a 0-base numerically indexed Object containing one Object for each open window.
  * `openWindow(width: Long, height: Long, minWidth: Long, minHeight: Long, maxWidth: Long, maxHeight: Long, canFullScreen: Boolean)`: Creates a new window on screen `width` by `height` screen pixels which cannot be smaller than `minWidth` x `minHeight` and cannot be larger than `maxWidth` x `maxHeight`. If `canFullScreen` is true, the fullscreen/maximize/zoom button is enabled. Returns an Object representing the window containing the following methods and properties:

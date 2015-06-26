@@ -1,11 +1,10 @@
-Open Runtime string API, version 1
-==================================
+# Open Runtime string API, version
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 The string API provides string manipulation and conversion functions.
 
-List of API functions
----------------------
+## List of API function
 
 * `concat(str1: String, str2: String)`: Concatenates `str2` to the end of `str1` and returns the result.
 * `length(str: String)`: Returns the length of `str`.

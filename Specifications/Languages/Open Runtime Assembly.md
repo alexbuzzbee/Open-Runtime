@@ -1,11 +1,10 @@
-Open Runtime Assembly Specification, version 1
-==============================================
+# Open Runtime Assembly Specification, version 1
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 Open Runtime Assembly (ORASM) is the official human-readable representation of Open Runtime Bytecode. It consists of two main portions: the instruction stream and the module formatting data. Module formatting data is only used when writing ORASM, not when disassembling it.
 
-Instruction stream
-------------------
+## Instruction stream
 
 The instruction stream is the representation of actual ORB instructions. Each instruction is formatted into its ORB mnemonic (listed in the ORB Specification) as uppercase, the flags as lowercase, some whitespace, a comma-space delimited list of operands, and a newline followed by zero or more whitespace before the next instruction. Registers are represented by the lowercase letter `r` and the register number. Constants are represented by the type name followed by the value. Hexadecimal numbers are prefixed with `0x`, decimal by `d`, binary by `b`. Comments are delimited by a `;`.
 
@@ -23,8 +22,7 @@ CALL someOtherFunction
 RUNT exit
 ```
 
-Module formatting data
-----------------------
+## Module formatting data
 
 Module formatting data consists of directives, labels, and function definitions and is used when writing modules in ORASM to make such writing possible. Directives consist of a `/` followed by any string and are parsed by the assembler to perform various actions. Labels are strings followed by a `:` which the assembler remembers and replaces with the correct offset. This allows the programmer to write loops and conditionals without worrying about offsets. Function definitions allow functions to be defined by surrounding a name with a `_` and `:`, followed by a newline, and an instruction stream terminated by three consecutive newlines. Function definitions add the code inside them and a function declaration to the module.
 

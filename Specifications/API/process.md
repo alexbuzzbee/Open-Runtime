@@ -1,11 +1,10 @@
-Open Runtime process API, version 1
-===================================
+# Open Runtime process API, version
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 The process API provides process manipulation functionality. Functions in this API may throw a `"PermissionException"` if non-permitted operations are attempted.
 
-List of API functions
----------------------
+## List of API function
 
  * `getEnv(name: String)`: Returns the String value stored in the environment variable `name`.
  * `setEnv(name: String, value: String)`: Sets the environment variable named by `name` to the value in `value`.
@@ -24,4 +23,4 @@ List of API functions
   * `canKill`: A Boolean indicating whether this process can be terminated by the Open Runtime program.
  * `terminate(pid: Long)`: Attempts to cleanly terminate the process identified by `pid`.
  * `kill(pid: Long)`: Attempts to forcefully terminate the process identified by `pid`.
- * `onSignal(signalId: Long, function: String)`: Upon receiving the Unix signal `signalId` or its equivalent, run the function named by `function`. 
+ * `onSignal(signalId: Long, function: String)`: Upon receiving the Unix signal `signalId` or its equivalent, run the function named by `function`.
