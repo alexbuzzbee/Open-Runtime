@@ -1,10 +1,10 @@
-# Open Runtime process API, version
+# Open Runtime process API, version 1
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 The process API provides process manipulation functionality. Functions in this API may throw a `"PermissionException"` if non-permitted operations are attempted.
 
-## List of API function
+## List of API functions
 
  * `getEnv(name: String)`: Returns the String value stored in the environment variable `name`.
  * `setEnv(name: String, value: String)`: Sets the environment variable named by `name` to the value in `value`.

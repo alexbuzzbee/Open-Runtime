@@ -1,10 +1,10 @@
-# Open Runtime filesystem API, version
+# Open Runtime filesystem API, version 1
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 
 The filesystem API provides access to filesystems. Paths are represented as a 0-base numerically indexed Object, with each property representing one path component. ANY of these functions may throw a `"PermissionException"` if non-permitted operations are attempted.
 
-## List of API function
+## List of API functions
 
  * `getSeparator()`: Returns a String containing the path separator.
  * `getRoot()`: Returns a path Object representing the root of the filesystem (e.g, on Unix, this is `{0: "/"}`, and on Windows, it's empty).
