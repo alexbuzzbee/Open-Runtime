@@ -6,7 +6,7 @@ Open Runtime Assembly (ORASM) is the official human-readable representation of O
 
 ## Instruction stream
 
-The instruction stream is the representation of actual ORB instructions. Each instruction is formatted into its ORB mnemonic (listed in the ORB Specification) as uppercase, the flags as lowercase, some whitespace, a comma-space delimited list of operands, and a newline followed by zero or more whitespace before the next instruction. Registers are represented by the lowercase letter `r` and the register number. Constants are represented by the type name followed by the value. Hexadecimal numbers are prefixed with `0x`, decimal by `d`, binary by `b`. Comments are delimited by a `;`.
+The instruction stream is the representation of actual ORB instructions. Each instruction is formatted into its ORB mnemonic (listed in the ORB Specification) as uppercase, the flags as lowercase, some whitespace, a comma-space delimited list of operands, and a newline followed by zero or more whitespace before the next instruction. Registers are represented by the lowercase letter `r` and the register number. Constants are represented by the type name followed by the value. Hexadecimal numbers are prefixed with `0x`, decimal by `d`, binary by `b`. Strings are prefixed and suffixed with a `"`. Comments are delimited by a `;`.
 
 ### Example instruction stream
 
