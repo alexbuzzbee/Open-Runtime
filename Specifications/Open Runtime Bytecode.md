@@ -8,7 +8,7 @@ The Open Runtime Bytecode (ORB) is a simple bytecode language for use in Open Ru
 
 ORB strings are strings of any bytes except [FD], [FE], and [FF] (used as seperators).
 
-ORB modules begin with a header (If a '#!' is detected, the Runtime MUST move to the end-of-line before parsing the header. This is for UNIX compatibility.). It is formatted as follows:
+ORB modules begin with a header (If the sequence `#!` is detected, the Runtime MUST move to the first end-of-line character before parsing the header. This is for UNIX compatibility.). It is formatted as follows:
 
 ORB version[FE]Creator[FE]Author[FE]Module name[FE]Module version[FE]Module size[FE]Module checksum[FE]Entry point[FE]Init function[FF]
 
@@ -31,7 +31,7 @@ Variable name[FE]Type[FE]Constant flag[FE]Initial value (optional)[FF]
 * The Constant flag indicates whether the variable is immutable (read-only).
 * The Initial value is the value the variable is initially set to. Its format is dependent on the Type, and is null for Objects and RuntimeDatas.
 
-The line of global variables is followed by an extra [FF], and the list of functions declared by the module.
+The list of global variables is followed by an extra [FF], and the list of functions declared by the module.
 
 Functions are pieces of code, invoked with arguments. Their entries in the function list are formatted as follows:
 
@@ -83,7 +83,7 @@ ORB code is formatted into instructions, consisting of a one-byte instruction nu
 * 03, MUL: Multiply the two operands. The first operand must be a register, and it is where the result is stored. The first two flag bits determine whether the second operand identifies a register, a global variable, or a constant value.
 * 04, DIV: Divide the second operand by the first. The first operand must be a register, and it is where the result is stored. The first two flag bits determine whether the second operand identifies a register, a global variable, or a constant value. The third flag bit, when enabled, transforms the operation into a modulus.
 * 05, CPY: Copy the first value to the second. The first two flag bits determine whether the first operand identifies a register, a global variable, or a constant value. The second two flag bits determine whether the second operand identifies a register, or a global variable.
-* 06, PCPY: Copy a property from an object to a register. The first operand is an object, the second a property name. The first two flag bits determine whether the first operand identifies a register, or a global variable.
+* 06, PCPY: Copy a property from an object to a register or vice versa. The first operand is an object, the second a property name, and the third a register. The first two flag bits determine whether the first operand identifies a register, or a global variable, while the third determines direction (0 = Object -> Register, 1 = Register -> Object)
 * 07, CMP: Compare two numbers of the same type. The first two flag bits determine whether the second operand identifies a register, a global variable, or a constant value, while the third and forth flag bits do the same for the second operand.
 * 08, JMP: Transfers execution to another position in the current function, identified with a 64-bit offset. Each flag identifies a possible condition.
   * 00000001: Less than.
