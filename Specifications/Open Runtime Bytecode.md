@@ -10,8 +10,9 @@ ORB strings are strings of any bytes except [FD], [FE], and [FF] (used as sepera
 
 ORB modules begin with a header (If the sequence `#!` is detected, the Runtime MUST move to the first end-of-line character before parsing the header. This is for UNIX compatibility.). It is formatted as follows:
 
-ORB version[FE]Creator[FE]Author[FE]Module name[FE]Module version[FE]Module size[FE]Module checksum[FE]Entry point[FE]Init function[FF]
+Magic[FE]ORB version[FE]Creator[FE]Author[FE]Module name[FE]Module version[FE]Module size[FE]Module checksum[FE]Entry point[FE]Init function[FF]
 
+* The Magic is the three ASCII bytes `O`, `R`, `B`.
 * The ORB version is the version of ORB in use in the module. It is a 16-bit unsigned integer. Modules with unknown or unsupported versions MUST be rejected by the Runtime.
 * The Creator is the name of the program that created the module. It is a string.
 * Author is the name of the module's author. It is a string.
@@ -27,7 +28,7 @@ The ORB header is followed by a list of global variables created by the module. 
 Variable name[FE]Type[FE]Constant flag[FE]Initial value (optional)[FF]
 
 * The Variable name is the name of the variable used to reference it from code. It is a string.
-* The Type is used to determine the contents of the variable. See 'Types' later in this document. It is an 16-bit unsigned integer.
+* The Type is used to determine the contents of the variable. See 'Types' later in this document. It is a 16-bit unsigned integer.
 * The Constant flag indicates whether the variable is immutable (read-only).
 * The Initial value is the value the variable is initially set to. Its format is dependent on the Type, and is null for Objects and RuntimeDatas.
 
@@ -38,8 +39,8 @@ Functions are pieces of code, invoked with arguments. Their entries in the funct
 Function name[FE]Code start offset[FE]Code end offset[FF]
 
 * The Function name is a name used to reference and execute the function. It is a string.
-* The Code start offset is an offset from the end of the function list at which function execution begins.
-* The Code end offset is an offset from the end of the function list at which function execution terminates.
+* The Code start offset is a 64-bit offset from the end of the function list at which function execution begins.
+* The Code end offset is a 64-bit offset from the end of the function list at which function execution terminates.
 
 After the list of functions is the bytecode itself, one function after the other.
 
