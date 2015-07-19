@@ -48,7 +48,7 @@ FUNCTION main()
 END FUNCTION
 ```
 
-The core statements are `PRINT` (prints (a) string(s) to the terminal), `INPUT` (reads a line from the terminal), `INPUTN` (reads a number from the terminal), `REM` (a comment), `RETURN` (returns a value from a function), `CAST` (casts a value to a new type, like `aString = CAST aNumber, String`), NEW (creates an instance of a class), and EXISTS (returns true for non-null values, false for null values).
+The core statements are `PRINT` (prints (a) string(s) to the terminal), `INPUT` (reads a line from the terminal), `INPUTN` (reads a number from the terminal), `REM` (a comment), `RETURN` (returns a value from a function), `CAST` (casts a value to a new type, like `aString = CAST aNumber, String`), `NEW` (creates an instance of a class), and `EXISTS` (returns true for non-null values, false for null values).
 
 Assignments are performed by placing a variable name before an `=` and an expression:
 
@@ -64,7 +64,7 @@ FUNCTION main()
 END FUNCTION
 ```
 
-Conditions may be performed using the `IF`, `THEN`, `ELSE`, and `END IF` keywords:
+Conditions may be used with the `IF`, `THEN`, `ELSE`, and `END IF` keywords:
 
 ```basic
 FUNCTION main()
@@ -153,18 +153,18 @@ Some examples:
 
 aGlobal = 3
 
-FUNCTION main()
+FUNCTION someEntry()
   #asm MOV aGlobal, r1
 END FUNCTION
 ```
 
 ## Implementation
 
-ORBASIC modules have an implicit init function, generated automatically by the compiler. The `#init` directive simply adds a `CALL` instruction to the end of this function. This init function performs ORBASIC-specific setup such as `loadModule(name)` calls.
+ORBASIC modules have an implicit init function, generated automatically by the compiler. The `#init` directive simply adds a `CALL` instruction to the end of this function, before the `RET`. This init function performs ORBASIC-specific setup such as `loadModule(name)` calls.
 
 ORBASIC functions return values in `r0` and preserve all other registers. The internal code to do so is implementation-dependant. Methods and initializers take as their first argument the `self` value, identifying the object to operate on.
 
-ORBASIC implements object-orientation through at least one function per class. Each class has a function named `__class_<className>_create()`, optionally (if an `INITIALIZER` is specified), an `__class_<className>_init()` function, and one function per method, named `__class_<className>_<methodName>()`. `__class_<className>_create()` is responsible for creating an Object using OCRT, setting the appropriate properties, adding methods, and finally calling `__class_<className>_init()`. A mocked up `__class_<className>_create()` function in ORASM follows:
+ORBASIC implements object-orientation through at least one function per class. Each class has a function named `__class_<className>_create()`, optionally (if an `INITIALIZER` is specified), an `__class_<className>_init()` function, and one function per method, named `__class_<className>_<methodName>()`. `__class_<className>_create()` is responsible for creating an Object using `OCRT`, setting the appropriate properties, adding methods, and finally calling `__class_<className>_init()`. A mocked up `__class_<className>_create()` function in ORASM follows:
 
 ```
 ___class_SomeClass_create:
